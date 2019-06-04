@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EmployeeService {
 
@@ -17,6 +19,10 @@ public class EmployeeService {
 
     public Page<Employee> selectAllEmployees(Pageable pageable) {
         return employeeRepository.findAll(pageable);
+    }
+
+    public Optional<Employee> selectEmployee(Long id) {
+        return employeeRepository.findById(id);
     }
 
     public Employee addEmployee(Employee employee) {

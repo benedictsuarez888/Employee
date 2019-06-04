@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -18,8 +19,13 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping
-    public Page<Employee> getEmployee(Pageable pageable) {
+    public Page<Employee> getAllEmployees(Pageable pageable) {
         return employeeService.selectAllEmployees(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Employee> getEmployee(@PathVariable Long id) {
+        return employeeService.selectEmployee(id);
     }
 
     @PostMapping
